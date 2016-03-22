@@ -40,6 +40,8 @@ import android.widget.ListView;
 import android.widget.ShareActionProvider;
 import android.widget.TextView;
 import android.widget.Toast;
+import java.text.SimpleDateFormat;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -58,6 +60,36 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+    }
+
+    //Start showing the tasks
+    private void displayTasks(){
+        //ArrayList with elements maybe from a database
+        //Example :
+        ArrayList<Task> TaskList = new ArrayList<Task>();
+
+        Task Task = new Task("Task_1","This is a Task", false, "2011-01-18 00:00:00.0", 1, false );
+        TaskList.add(Task);
+
+
+        CustomAdapter dataAdapter = new CustomAdapter(this,
+                R.layout.task, TaskList);
+        ListView listView = (ListView) findViewById(R.id.title);
+        // Assign adapter to ListView
+        listView.setAdapter(dataAdapter);
+
+
+        listView.setOnItemClickListener(new OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View view,
+                                    int position, long id) {
+                // When clicked, show a toast with the TextView text
+                Task country = (Task) parent.getItemAtPosition(position);
+                Toast.makeText(getApplicationContext(),
+                        "Clicked on Row: " + country.getTitle(),
+                        Toast.LENGTH_LONG).show();
+            }
+        });
+
     }
 
     @Override
