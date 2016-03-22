@@ -3,8 +3,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.example.bherrl.todolist.MainActivity">
     <item
-        android:id="@+id/action_settings"
-        android:orderInCategory="100"
-        android:title="@string/action_settings"
-        app:showAsAction="never" />
+        android:id="@+id/action_Filter_Prio"
+        android:title="Priority"
+        />
+    <item
+        android:id="@+id/action_Filter_Date"
+        android:title="Date"
+        />
+    <item
+        android:id="@+id/action_Filter_Status"
+        android:title="Status"
+        />
 </menu>
