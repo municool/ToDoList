@@ -5,6 +5,7 @@
     <item
         android:id="@+id/action_Filter_Prio"
         android:title="Priority"
+        android:icon="@drawable/"
         />
     <item
         android:id="@+id/action_Filter_Date"

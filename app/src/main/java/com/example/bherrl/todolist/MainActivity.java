@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
         //Example :
         ArrayList<Task> TaskList = new ArrayList<Task>();
 
-        Task Task = new Task("Task_1","This is a Task", false, "2011-01-18 00:00:00.0", 1, false );
+        Task Task = new Task("Task_1","This is a Task", false, 1, false );
         TaskList.add(Task);
 
 
