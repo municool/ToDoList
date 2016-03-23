@@ -119,4 +119,8 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    public void redirector(){
+        setContentView(R.layout.activity_main);
+    }
 }
