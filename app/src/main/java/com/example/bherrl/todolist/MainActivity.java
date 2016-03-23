@@ -61,32 +61,37 @@ public class MainActivity extends AppCompatActivity {
                 MainActivity.this.startActivity(editIntent);
             }
         });
+
+        displayTasks();
     }
 
     //Start showing the tasks
     private void displayTasks(){
         //ArrayList with elements maybe from a database
-        //Example :
         ArrayList<Task> TaskList = new ArrayList<Task>();
 
+        //Add Data to the array
         Task Task = new Task("Task_1","This is a Task", false, 1, false );
         TaskList.add(Task);
+        Task = new Task("Task_2","This is a Task", false, 1, false );
+        TaskList.add(Task);
 
-
+        //Initialize the CustomAdapter and pass the correspondent vars to constructor
         CustomAdapter dataAdapter = new CustomAdapter(this,
                 R.layout.task, TaskList);
-        ListView listView = (ListView) findViewById(R.id.title);
+        //ListView_Tasks-> ID of the ListView available in content_main.xml, where Tasks are added
+        ListView listView = (ListView) findViewById(R.id.ListView_Tasks);
         // Assign adapter to ListView
         listView.setAdapter(dataAdapter);
 
-
+        //Click Event Listener
         listView.setOnItemClickListener(new OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
                 // When clicked, show a toast with the TextView text
-                Task country = (Task) parent.getItemAtPosition(position);
+                Task task = (Task) parent.getItemAtPosition(position);
                 Toast.makeText(getApplicationContext(),
-                        "Clicked on Row: " + country.getTitle(),
+                        "Clicked on Row: " + task.getTitle(),
                         Toast.LENGTH_LONG).show();
             }
         });

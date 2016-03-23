@@ -20,7 +20,7 @@ public class Task {
         this.description = desc;
         this.title = title;
         this.done = d;
-        this.date = date;
+        //this.date = date;
         this.priority = prio;
         this.notification = notif;
     }

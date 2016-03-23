@@ -44,7 +44,7 @@ public class CustomAdapter extends ArrayAdapter<Task> {
     Context context;
 
     public CustomAdapter(Context context, int textViewResourceId,
-                           ArrayList<Task> TaskList) {
+                         ArrayList<Task> TaskList) {
         super(context, textViewResourceId, TaskList);
         this.TaskList = new ArrayList<Task>();
         this.TaskList.addAll(TaskList);
@@ -52,8 +52,10 @@ public class CustomAdapter extends ArrayAdapter<Task> {
     }
 
     private class ViewHolder {
-        TextView code;
-        CheckBox name;
+        TextView title;
+        TextView description;
+        CheckBox checkBox;
+
     }
 
     @Override
@@ -68,33 +70,36 @@ public class CustomAdapter extends ArrayAdapter<Task> {
             //If-> To know which view has to be redered (Tasks Main)
             convertView = vi.inflate(R.layout.task, null);
 
+            //Create a new ViewHolder Obj. In the ViewHolder Object you define all the things you need for the actual task to show in the List
             holder = new ViewHolder();
 
-            holder.code = (TextView) convertView.findViewById(R.id.title);
-            holder.name = (CheckBox) convertView.findViewById(R.id.description);
+
+            holder.title = (TextView) convertView.findViewById(R.id.title);
+            holder.description = (TextView) convertView.findViewById(R.id.description);
+            holder.checkBox = (CheckBox) convertView.findViewById(R.id.checkBox_Task);
             convertView.setTag(holder);
 
-            holder.name.setOnClickListener( new View.OnClickListener() {
-                public void onClick(View v) {
-                    CheckBox cb = (CheckBox) v ;
-                    Task Task = (Task) cb.getTag();
-                    Toast.makeText(context.getApplicationContext(),
-                            "Clicked on Checkbox: " + cb.getText() +
-                                    " is " + cb.isChecked(),
-                            Toast.LENGTH_LONG).show();
-                    Task.setDone(cb.isChecked());
-                }
-            });
+//            holder.checkBox.setOnClickListener(new View.OnClickListener() {
+//                public void onClick(View v) {
+//                    CheckBox cb = (CheckBox) v;
+//                    Task Task = (Task) cb.getTag();
+//                    Toast.makeText(context.getApplicationContext(),
+//                            "Clicked on Checkbox: " + cb.getText() +
+//                                    " is " + cb.isChecked(),
+//                            Toast.LENGTH_LONG).show();
+//                    Task.setDone(cb.isChecked());
+//                }
+//            });
         }
         else {
             holder = (ViewHolder) convertView.getTag();
         }
 
         Task Task = TaskList.get(position);
-        holder.code.setText(" (" +  Task.getTitle() + ")");
-        holder.name.setText(Task.getDescription());
-        holder.name.setChecked(Task.getDone());
-        holder.name.setTag(Task);
+        holder.title.setText(Task.getTitle());
+        holder.description.setText(Task.getDescription());
+        holder.checkBox.setChecked(Task.getDone());
+        holder.description.setTag(Task);
 
         return convertView;
 

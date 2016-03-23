@@ -2,24 +2,36 @@
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="?android:attr/listPreferredItemHeight"
+    android:layout_height="100dip"
     android:padding="6dip"
-    android:id="@+id/relativeLayout">
+    android:id="@+id/relativeLayout_Task"
+    android:background="@drawable/task_shape">
 
     <CheckBox
-        android:id="@+id/description"
+        android:id="@+id/checkBox_Task"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@id/title"
+        android:layout_alignParentLeft="@id/title"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:layout_alignWithParentIfMissing="true"
-        android:gravity="center_vertical"
-        android:text="Example application"
-        android:textSize="16sp" />
+        android:gravity="center_vertical" />
 
     <TextView
         android:id="@+id/title"
+        android:layout_toRightOf="@+id/checkBox_Task"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignWithParentIfMissing="true"
+        android:gravity="center_vertical"
+        android:text="Title"
+        android:textSize="16sp"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="31dp" />
+
+    <TextView
+        android:id="@+id/description"
+        android:layout_below="@+id/title"
         android:layout_width="fill_parent"
         android:layout_height="26dip"
         android:layout_alignParentBottom="true"
@@ -27,8 +39,9 @@
         android:ellipsize="marquee"
         android:singleLine="true"
         android:text="Description"
-        android:textSize="12sp" />
-
-
+        android:textSize="12sp"
+        android:layout_alignStart="@+id/title" />
 
 </RelativeLayout>
+
+    <!--?android:attr/listPreferredItemHeight"-->

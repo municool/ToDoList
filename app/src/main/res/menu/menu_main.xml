@@ -4,8 +4,7 @@
     tools:context="com.example.bherrl.todolist.MainActivity">
     <item
         android:id="@+id/action_Filter_Prio"
-        android:title="Priority"
-        android:icon="@drawable/"
+        android:title="Priority"/>
         />
     <item
         android:id="@+id/action_Filter_Date"
