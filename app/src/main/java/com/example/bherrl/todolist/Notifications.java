@@ -41,7 +41,6 @@ public class Notifications extends BroadcastReceiver{
         //Bit to be bitwise-ored into the flags field that should be set if the notification should be canceled when it is clicked by the user
         //The Line below makes the Notification disappear when clicked
         notification.flags = Notification.DEFAULT_LIGHTS | Notification.FLAG_AUTO_CANCEL;
-        notification.flags = Notification.FLAG_SHOW_LIGHTS;
 
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         notificationManager.notify(0, notification);
