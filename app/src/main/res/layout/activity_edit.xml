@@ -66,7 +66,7 @@
         android:layout_alignParentStart="true" />
     <EditText
         android:layout_width="match_parent"
-        android:layout_height="120dp"
+        android:layout_height="100dp"
         android:id="@+id/etDescription"
         android:layout_centerVertical="true"
         android:layout_alignParentStart="true" />
@@ -96,13 +96,23 @@
             android:checked="true" />
         <RadioButton
             android:layout_gravity="right"
-            android:layout_width="81dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Low"
             android:id="@+id/rbLow" />
 
     </RadioGroup>
+
+    <Switch
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/switch1"
+        android:enabled="true"
+        android:text="Notification"
+        android:checked="true"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true" />
 
 
 </RelativeLayout>
