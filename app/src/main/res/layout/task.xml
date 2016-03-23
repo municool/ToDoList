@@ -5,7 +5,8 @@
     android:layout_height="100dip"
     android:padding="6dip"
     android:id="@+id/relativeLayout_Task"
-    android:background="@drawable/task_shape">
+    android:background="@drawable/task_shape"
+    android:layout_margin="30dp">
 
     <CheckBox
         android:id="@+id/checkBox_Task"
