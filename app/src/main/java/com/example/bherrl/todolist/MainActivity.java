@@ -1,5 +1,9 @@
 package com.example.bherrl.todolist;
 
+import android.annotation.TargetApi;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -9,7 +13,9 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
@@ -47,6 +53,7 @@ import java.text.SimpleDateFormat;
 
 public class MainActivity extends AppCompatActivity {
 
+    @TargetApi(Build.VERSION_CODES.KITKAT)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,6 +70,24 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+        // Alarm Manager is created using ALARM_SERVICE.
+        //Params_> PendingIntent and Time
+        //The Intent is launched  after the time is over
+        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+
+        //Notification Intent is created with an Action
+        Intent notifIntent = new Intent("android.media.action.DISPLAY_NOTIFICATION");
+        notifIntent.addCategory("android.intent.category.DEFAULT");
+
+        PendingIntent broadcast = PendingIntent.getBroadcast(this, 100, notifIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.SECOND, 5);
+        alarmManager.setExact(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), broadcast);
+
+
+        // Method to Display Tasks
         displayTasks();
     }
 
@@ -76,10 +101,8 @@ public class MainActivity extends AppCompatActivity {
         TaskList.add(Task);
         Task = new Task("Task_2", "This is a Task", false, 1, false);
         TaskList.add(Task);
-
         //Initialize the CustomAdapter and pass the correspondent vars to constructor
-        CustomAdapter dataAdapter = new CustomAdapter(this,
-                R.layout.task, TaskList);
+        CustomAdapter dataAdapter = new CustomAdapter(this,R.layout.task, TaskList);
         //ListView_Tasks-> ID of the ListView available in content_main.xml, where Tasks are added
         ListView listView = (ListView) findViewById(R.id.ListView_Tasks);
         // Assign adapter to ListView
