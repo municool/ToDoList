@@ -3,128 +3,136 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_alignParentTop="true"
+    android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:layout_alignParentTop="true"
-    android:orientation="vertical"
     tools:context="com.example.bherrl.todolist.EditActivity">
+
     <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
         android:id="@+id/linearLayout"
-        android:paddingBottom="10dp"
-        android:layout_alignParentTop="true">
-        <ImageButton
-            android:layout_width="match_parent"
-            android:layout_weight="1"
-            android:layout_height="80dp"
-            android:src="@mipmap/ic_uncheck"
-            android:id="@+id/btnCancel"/>
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:paddingBottom="10dp">
 
         <ImageButton
+            android:id="@+id/btnCancel"
             android:layout_width="match_parent"
-            android:layout_weight="1"
             android:layout_height="80dp"
+            android:layout_weight="1"
+            android:src="@mipmap/ic_uncheck" />
+
+        <ImageButton
+            android:id="@+id/btnSubmit"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_weight="1"
             android:src="@mipmap/ic_check"
-            android:id="@+id/btnSubmit" />
+            android:onClick="createTask"/>
     </LinearLayout>
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Title"
         android:id="@+id/tvTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
         android:layout_below="@+id/linearLayout"
-        android:layout_alignParentStart="true" />
+        android:text="Title"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Description"
         android:id="@+id/tvDescription"
-        android:layout_above="@+id/etDescription"
-        android:layout_alignParentStart="true" />
-    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Priority"
+        android:layout_above="@+id/etDescription"
+        android:layout_alignParentStart="true"
+        android:text="Description"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
         android:id="@+id/tvPriority"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
         android:layout_below="@+id/etDescription"
-        android:layout_alignParentStart="true" />
+        android:text="Priority"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <EditText
+        android:id="@+id/etTitle"
         android:layout_width="match_parent"
         android:layout_height="10dp"
-        android:id="@+id/etTitle"
-        android:layout_below="@id/tvTitle"
         android:layout_above="@id/tvDescription"
-        android:layout_centerVertical="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_below="@id/tvTitle"
+        android:layout_centerVertical="true" />
+
     <EditText
+        android:id="@+id/etDescription"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:id="@+id/etDescription"
-        android:layout_centerVertical="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true" />
 
     <RadioGroup
+        android:id="@+id/rgPriority"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tvPriority"
         android:layout_alignParentStart="true"
+        android:layout_below="@+id/tvPriority"
         android:orientation="horizontal"
-        android:id="@+id/rgPriority"
         android:paddingBottom="20dp">
 
         <RadioButton
+            android:id="@+id/rbHigh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="left"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="High"
-            android:id="@+id/rbHigh" />
+            android:text="High" />
+
         <RadioButton
-            android:layout_gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Medium"
             android:id="@+id/rbMedium"
-            android:checked="true" />
-        <RadioButton
-            android:layout_gravity="right"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_weight="1"
-            android:text="Low"
-            android:id="@+id/rbLow" />
+            android:checked="true"
+            android:text="Medium" />
+
+        <RadioButton
+            android:id="@+id/rbLow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_weight="1"
+            android:text="Low" />
 
     </RadioGroup>
 
     <TextView
+        android:id="@+id/tvChooseDate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_below="@id/rgPriority"
+        android:onClick="showDatePickerDialog"
         android:text="Choose Date"
         android:textAlignment="center"
-        android:layout_below="@id/rgPriority"
-        android:id="@+id/tvChooseDate"
-        android:onClick="showDatePickerDialog"/>
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <Switch
+        android:id="@+id/swNotification"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tvChooseDate"
-        android:id="@+id/swNotification"
-        android:enabled="true"
-        android:text="Notification"
-        android:checked="true"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_below="@id/tvChooseDate"
+        android:checked="true"
+        android:enabled="true"
+        android:text="Notification" />
 
 
 </RelativeLayout>

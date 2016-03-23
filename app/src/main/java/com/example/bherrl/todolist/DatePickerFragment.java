@@ -4,6 +4,7 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
+import android.util.Log;
 import android.widget.DatePicker;
 import android.widget.TextView;
 
@@ -27,11 +28,16 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
     }
 
     public void onDateSet(DatePicker view, int year, int month, int day) {
-        // Do something with the date chosen by the user
+        //Save into Variable for JsonObject
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.YEAR, year);
+        calendar.set(Calendar.MONTH, month);
+        calendar.set(Calendar.DAY_OF_MONTH, day);
+        ((EditActivity) getActivity()).setDateMillis(calendar.getTimeInMillis());
+
+        //TextView for GUI
         TextView tv = (TextView) getActivity().findViewById(R.id.tvChooseDate);
-
         month = month + 1;
-
         tv.setText(day + "/" + month + "/" + year);
     }
 }
