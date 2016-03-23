@@ -41,6 +41,7 @@ import android.widget.ListView;
 import android.widget.ShareActionProvider;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import java.text.SimpleDateFormat;
 
 
@@ -66,14 +67,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //Start showing the tasks
-    private void displayTasks(){
+    private void displayTasks() {
         //ArrayList with elements maybe from a database
         ArrayList<Task> TaskList = new ArrayList<Task>();
 
         //Add Data to the array
-        Task Task = new Task("Task_1","This is a Task", false, 1, false );
+        Task Task = new Task("Task_1", "This is a Task", false, 1, false);
         TaskList.add(Task);
-        Task = new Task("Task_2","This is a Task", false, 1, false );
+        Task = new Task("Task_2", "This is a Task", false, 1, false);
         TaskList.add(Task);
 
         //Initialize the CustomAdapter and pass the correspondent vars to constructor
