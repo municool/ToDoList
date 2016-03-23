@@ -77,7 +77,8 @@
         android:layout_below="@+id/tvPriority"
         android:layout_alignParentStart="true"
         android:orientation="horizontal"
-        android:id="@+id/rgPriority">
+        android:id="@+id/rgPriority"
+        android:paddingBottom="20dp">
 
         <RadioButton
             android:layout_gravity="left"
@@ -104,10 +105,21 @@
 
     </RadioGroup>
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Choose Date"
+        android:textAlignment="center"
+        android:layout_below="@id/rgPriority"
+        android:id="@+id/tvChooseDate"
+        android:onClick="showDatePickerDialog"/>
+
     <Switch
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/switch1"
+        android:layout_below="@id/tvChooseDate"
+        android:id="@+id/swNotification"
         android:enabled="true"
         android:text="Notification"
         android:checked="true"
