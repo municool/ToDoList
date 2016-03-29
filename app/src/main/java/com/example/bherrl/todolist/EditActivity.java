@@ -47,7 +47,7 @@ public class EditActivity extends AppCompatActivity {
 
     public void createTask(View v) {
 
-        JSONObject jo = new JSONObject();
+        MainActivity ma = new MainActivity();
         EditText etTitle = (EditText) findViewById(R.id.etTitle);
         EditText etDescription = (EditText) findViewById(R.id.etDescription);
         RadioGroup rgPriority = (RadioGroup) findViewById(R.id.rgPriority);
@@ -57,30 +57,28 @@ public class EditActivity extends AppCompatActivity {
         View radioButton = rgPriority.findViewById(radioButtonID);
         int idx = rgPriority.indexOfChild(radioButton);
 
-
 //        Log.v("Index", Integer.toString(idx));
 //        Log.v("switch", Boolean.toString(sw.isChecked()));
 
-        try {
-            Task tsk = new Task(etTitle.getText().toString(), etDescription.getText().toString(), idx, sw.isChecked(), dateMillis, false);
-        } catch (JSONException je) {
-            je.printStackTrace();
-        }
+        Task tsk = new Task(etTitle.getText().toString(), etDescription.getText().toString(), false, idx, sw.isChecked(), dateMillis);
 
-        hl.saveTasks();
-        Log.v( "test json", jo.toString());
+        ArrayList<Task> t = ma.getTaskList();
+        t.add(tsk);
+        ma.setTaskList(t);
+        hl.saveTasks(ma.getTaskList());
 
         finish();
 
     }
 
 
-    private void createFile(String fileName, String fileContent) {
+    private void saveFile(JSONArray tasks) {
         FileOutputStream outputStream;
+        String fileName = "tasks.json";
 
         try {
             outputStream = openFileOutput(fileName, Context.MODE_PRIVATE);
-            outputStream.write(fileContent.getBytes());
+            outputStream.write(tasks.toString().getBytes());
             outputStream.close();
         } catch (Exception e) {
             e.printStackTrace();

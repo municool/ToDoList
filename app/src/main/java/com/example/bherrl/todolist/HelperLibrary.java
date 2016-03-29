@@ -12,11 +12,10 @@ import java.util.ArrayList;
 public class HelperLibrary {
 
 
-    public void saveTasks(){
+    public JSONArray saveTasks(ArrayList<Task> tasks) {
         JSONArray ja = new JSONArray();
-        ArrayList<Task> tasks = getTasks();
 
-        for(Task task : tasks){
+        for (Task task : tasks) {
             JSONObject jo = new JSONObject();
 
             try {
@@ -31,8 +30,8 @@ public class HelperLibrary {
             } catch (JSONException je) {
                 je.printStackTrace();
             }
-
         }
+        return ja;
     }
 
 }

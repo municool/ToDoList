@@ -53,6 +53,17 @@ import java.text.SimpleDateFormat;
 
 public class MainActivity extends AppCompatActivity {
 
+
+    private static ArrayList<Task> TaskList = new ArrayList<Task>();
+
+    public ArrayList<Task> getTaskList() {
+        return TaskList;
+    }
+
+    public void setTaskList(ArrayList<Task> taskList) {
+        TaskList = taskList;
+    }
+
     @TargetApi(Build.VERSION_CODES.KITKAT)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,16 +104,13 @@ public class MainActivity extends AppCompatActivity {
 
     //Start showing the tasks
     private void displayTasks() {
-        //ArrayList with elements maybe from a database
-        ArrayList<Task> TaskList = new ArrayList<Task>();
-
         //Add Data to the array
         Task Task = new Task("Task_1", "This is a Task", false, 1, false);
         TaskList.add(Task);
         Task = new Task("Task_2", "This is a Task", false, 1, false);
         TaskList.add(Task);
         //Initialize the CustomAdapter and pass the correspondent vars to constructor
-        CustomAdapter dataAdapter = new CustomAdapter(this,R.layout.task, TaskList);
+        CustomAdapter dataAdapter = new CustomAdapter(this, R.layout.task, TaskList);
         //ListView_Tasks-> ID of the ListView available in content_main.xml, where Tasks are added
         ListView listView = (ListView) findViewById(R.id.ListView_Tasks);
         // Assign adapter to ListView
