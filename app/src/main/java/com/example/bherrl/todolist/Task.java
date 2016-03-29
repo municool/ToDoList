@@ -1,17 +1,24 @@
 package com.example.bherrl.todolist;
 
+import android.content.Context;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.Date;
 
 /**
  * Created by bdomij on 22.03.2016.
  */
 public class Task {
+    int taskID ;
     String title = "";
     String description = "";
     //0 = Low; 1 = Medium; 2 = High;
     int priority = 0;
     //"yyyy.MM.dd G -> Format DateTime
-    Date date = new Date();
+    long date;
     boolean done = false;
     boolean notification = false;
 
@@ -26,6 +33,21 @@ public class Task {
     }
 
     //Setter
+    public void setTaskID(String filename, Context context){
+
+        FileInputStream inputStream = null;
+        try {
+            inputStream = context.openFileInput("Tasks.json");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+
+
+        //this.taskID = ID;
+    }
+
     public void  setTitle(String title){
         this.title = title;
     }
@@ -42,7 +64,7 @@ public class Task {
         this.priority = prio;
     }
 
-    public void setDate(Date date){
+    public void setDate(long date){
         this.date = date;
     }
 
@@ -63,7 +85,7 @@ public class Task {
         return this.priority;
     }
 
-    public Date getDate(){
+    public long getDate(){
         return this.date;
     }
 

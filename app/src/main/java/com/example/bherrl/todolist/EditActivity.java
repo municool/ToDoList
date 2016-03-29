@@ -30,7 +30,7 @@ public class EditActivity extends AppCompatActivity {
             cancel.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    //Call this Method in order to go back to main View
+                    //Call this Method in order to go back to the main View
                     finish();
                 }
             });
