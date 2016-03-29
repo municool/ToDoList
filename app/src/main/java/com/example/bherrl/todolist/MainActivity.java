@@ -26,6 +26,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -55,9 +56,7 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        hl = new HelperLibrary();
-
-
+        hl = new HelperLibrary(this);
     }
 
     @TargetApi(Build.VERSION_CODES.KITKAT)
@@ -72,6 +71,7 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
                 MainActivity.this.startActivity(editIntent);
             }
         });
+
 
 
         // Alarm Manager is created using ALARM_SERVICE.
@@ -116,10 +116,6 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
             e.printStackTrace();
         }
 
-//        Task t = new Task(1,"Title", "Low", false, 0, false, 1);
-//        Task tt = new Task(1,"Title", "Medium", false, 1, false, 1);
-//        Task ts = new Task(1,"Title", "High", false, 2, false, 1);
-//        taskList.add(t);taskList.add(tt);taskList.add(ts);
         //Initialize the CustomAdapter and pass the correspondent vars to constructor
         CustomAdapter dataAdapter = new CustomAdapter(this, R.layout.task, taskList);
         //ListView_Tasks-> ID of the ListView available in content_main.xml, where Tasks are added
