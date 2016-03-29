@@ -25,7 +25,7 @@ public class Task {
     boolean notification = false;
 
     //Konstruktor
-    public Task(String title, String desc, boolean d, int prio, boolean notif, long date){
+    public Task(String title, String desc, int prio, long date, boolean d, boolean notif){
         this.description = desc;
         this.title = title;
         this.done = d;
