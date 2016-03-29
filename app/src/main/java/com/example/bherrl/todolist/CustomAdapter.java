@@ -112,11 +112,11 @@ public class CustomAdapter extends ArrayAdapter<Task> {
 
         RelativeLayout r = (RelativeLayout)convertView.findViewById(R.id.relativeLayout_Task);
         GradientDrawable bgShape = (GradientDrawable)r.getBackground();
-        if(Task.getPriority() == 0){
+        if(Task.getPriority() == 2){
             bgShape.setColor(ContextCompat.getColor(context, R.color.defaultLow));
         }else if(Task.getPriority() == 1){
             bgShape.setColor(ContextCompat.getColor(context, R.color.medium));
-        }else if(Task.getPriority() == 2){
+        }else if(Task.getPriority() == 0){
             bgShape.setColor(ContextCompat.getColor(context, R.color.high));
         }
 
