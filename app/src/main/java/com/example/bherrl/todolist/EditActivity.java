@@ -44,7 +44,9 @@ public class EditActivity extends AppCompatActivity {
 
     public void createTask(View v) {
 
+
         MainActivity ma = new MainActivity();
+        ArrayList<Task> t = ma.getTaskList();
         EditText etTitle = (EditText) findViewById(R.id.etTitle);
         EditText etDescription = (EditText) findViewById(R.id.etDescription);
         RadioGroup rgPriority = (RadioGroup) findViewById(R.id.rgPriority);
@@ -57,9 +59,12 @@ public class EditActivity extends AppCompatActivity {
 //        Log.v("Index", Integer.toString(idx));
 //        Log.v("switch", Boolean.toString(sw.isChecked()));
 
-        Task tsk = new Task(etTitle.getText().toString(), etDescription.getText().toString(), false, idx, sw.isChecked(), dateMillis);
+        Task ts = t.get(t.size() - 1);
+        int id = ts.getTaskID() + 1;
 
-        ArrayList<Task> t = ma.getTaskList();
+        Task tsk = new Task(id, etTitle.getText().toString(), etDescription.getText().toString(), false, idx, sw.isChecked(), dateMillis);
+
+
         t.add(tsk);
         ma.setTaskList(t);
 
