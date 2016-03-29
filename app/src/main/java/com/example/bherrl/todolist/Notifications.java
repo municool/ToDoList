@@ -35,7 +35,7 @@ public class Notifications extends BroadcastReceiver{
         Notification notification = builder
                         .setContentTitle("Oh my Gosh ...")
                         .setSmallIcon(R.mipmap.ic_tick)
-                        .setContentText("What is this.. A notification")
+                        .setContentText("What is this.. A notification What is this.. A notification What is this.. A notification What is this.. A notification What is this.. A notification")
                         .setContentIntent(pendingIntent).build();
 
         //Bit to be bitwise-ored into the flags field that should be set if the notification should be canceled when it is clicked by the user
