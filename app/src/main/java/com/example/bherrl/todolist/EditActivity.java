@@ -44,7 +44,8 @@ public class EditActivity extends AppCompatActivity {
 
     public void createTask(View v) {
 
-
+        Task ts;
+        int id;
         MainActivity ma = new MainActivity();
         ArrayList<Task> t = ma.getTaskList();
         EditText etTitle = (EditText) findViewById(R.id.etTitle);
@@ -58,9 +59,13 @@ public class EditActivity extends AppCompatActivity {
 
 //        Log.v("Index", Integer.toString(idx));
 //        Log.v("switch", Boolean.toString(sw.isChecked()));
-
-        Task ts = t.get(t.size() - 1);
-        int id = ts.getTaskID() + 1;
+        
+        if(t.size() != 0) {
+            ts = t.get(t.size() - 1);
+            id = ts.getTaskID() + 1;
+        }else{
+            id = 1;
+        }
 
         Task tsk = new Task(id, etTitle.getText().toString(), etDescription.getText().toString(), false, idx, sw.isChecked(), dateMillis);
 
