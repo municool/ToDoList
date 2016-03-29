@@ -174,6 +174,8 @@ public class MainActivity extends AppCompatActivity {
 //    public Task(int id, String title, String desc, boolean d, int prio, boolean notif, long date){
                 Task t = new Task(id,title, desc,done, prio, notif, date);
                 TaskList.add(t);
+
+                TaskList.get(TaskList.size() - 1)
             }
         } catch (JSONException e) {
             e.printStackTrace();

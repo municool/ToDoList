@@ -67,6 +67,8 @@ public class Task {
     }
 
     //Getter
+    public int getTaskID(){  return this.taskID;  }
+
     public String getTitle(){
         return this.title;
     }
@@ -91,6 +93,8 @@ public class Task {
     public boolean getDone(){
         return this.done;
     }
+
+
 
 
 }
