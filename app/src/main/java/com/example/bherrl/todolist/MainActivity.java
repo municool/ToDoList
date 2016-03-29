@@ -6,7 +6,6 @@ import android.app.PendingIntent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -21,56 +20,32 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Date;
-import java.util.List;
 
 
-import android.app.Activity;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
-import android.os.Bundle;
-import android.support.v4.app.ShareCompat;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.ListView;
-import android.widget.ShareActionProvider;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.SimpleDateFormat;
-
 
 public class MainActivity extends AppCompatActivity {
 
 
-    private static ArrayList<Task> TaskList = new ArrayList<Task>();
+    private static ArrayList<Task> taskList = new ArrayList<Task>();
+    private HelperLibrary hl;
 
     public ArrayList<Task> getTaskList() {
-        return TaskList;
+        return taskList;
     }
 
     public void setTaskList(ArrayList<Task> taskList) {
-        TaskList = taskList;
+        MainActivity.taskList = taskList;
     }
 
     @TargetApi(Build.VERSION_CODES.KITKAT)
@@ -80,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        hl = new HelperLibrary();
 
 
     }
@@ -140,10 +116,10 @@ public class MainActivity extends AppCompatActivity {
 //            e.printStackTrace();
 //        }
 
-        Task t = new Task(1,"Title", "Low", false, 0, false, 1);
-        Task tt = new Task(2,"Title", "Medium", false, 1, false, 1);
-        Task ts = new Task(3,"Title", "High", false, 2, false, 1);
-        TaskList.add(t);TaskList.add(tt);TaskList.add(ts);
+//        Task t = new Task(1,"Title", "Low", false, 0, false, 1);
+//        Task tt = new Task(2,"Title", "Medium", false, 1, false, 1);
+//        Task ts = new Task(3,"Title", "High", false, 2, false, 1);
+//        taskList.add(t);taskList.add(tt);taskList.add(ts);
         String myData = "";
         try {
             FileInputStream fis = openFileInput("tasks.json");
@@ -156,7 +132,7 @@ public class MainActivity extends AppCompatActivity {
                 myData = myData + line;
             }
 
-            parseJson(myData);
+            taskList = hl.parseJson(myData);
             in.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -167,9 +143,9 @@ public class MainActivity extends AppCompatActivity {
 //        Task t = new Task(1,"Title", "Low", false, 0, false, 1);
 //        Task tt = new Task(1,"Title", "Medium", false, 1, false, 1);
 //        Task ts = new Task(1,"Title", "High", false, 2, false, 1);
-//        TaskList.add(t);TaskList.add(tt);TaskList.add(ts);
+//        taskList.add(t);taskList.add(tt);taskList.add(ts);
         //Initialize the CustomAdapter and pass the correspondent vars to constructor
-        CustomAdapter dataAdapter = new CustomAdapter(this, R.layout.task, TaskList);
+        CustomAdapter dataAdapter = new CustomAdapter(this, R.layout.task, taskList);
         //ListView_Tasks-> ID of the ListView available in content_main.xml, where Tasks are added
         ListView listView = (ListView) findViewById(R.id.ListView_Tasks);
         // Assign adapter to ListView
@@ -189,31 +165,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void parseJson(String data){
 
-        JSONArray jsObj = null;
-        try {
-            jsObj = new JSONArray(data);
-            for(int i=0; i < jsObj.length(); i++) {
-                JSONObject jo = jsObj.getJSONObject(i);
-
-                int id = jo.getInt("taskID");
-                String title = jo.getString("title");
-                String desc = jo.getString("description");
-                int prio = jo.getInt("priority");
-                long date = jo.getLong("date");
-                boolean notif = jo.getBoolean("notification");
-                boolean done = jo.getBoolean("done");
-
-//    Konsttruktor:
-//    public Task(int id, String title, String desc, boolean d, int prio, boolean notif, long date){
-                Task t = new Task(id,title, desc,done, prio, notif, date);
-                TaskList.add(t);
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
