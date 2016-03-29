@@ -82,28 +82,6 @@ public class EditActivity extends AppCompatActivity {
 
     }
 
-<<<<<<< HEAD
-    private void editTask(){
-
-    }
-
-    private void saveFile(JSONArray tasks) {
-        FileOutputStream outputStream;
-        String fileName = "tasks.json";
-
-        try {
-            outputStream = openFileOutput(fileName, Context.MODE_PRIVATE);
-            String jsonString = tasks.toString();
-            outputStream.write(jsonString.getBytes());
-            outputStream.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-    }
-
-=======
->>>>>>> a78c749fa6ba161cc91b86b591f153529c10282b
     public long getDateMillis() {
         return dateMillis;
     }
@@ -112,4 +90,3 @@ public class EditActivity extends AppCompatActivity {
         this.dateMillis = dateMillis;
     }
 }
-
