@@ -1,5 +1,10 @@
 package com.example.bherrl.todolist;
 
+import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
+import android.graphics.drawable.shapes.Shape;
+import android.renderscript.RenderScript;
+import android.support.v4.content.ContextCompat;
 import android.widget.ArrayAdapter;
 import com.example.bherrl.todolist.Task;
 
@@ -31,6 +36,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ListView;
+import android.widget.RadioButton;
+import android.widget.RelativeLayout;
 import android.widget.ShareActionProvider;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -56,6 +63,7 @@ public class CustomAdapter extends ArrayAdapter<Task> {
         TextView description;
         CheckBox checkBox;
 
+        Shape form;
     }
 
     @Override
@@ -77,6 +85,8 @@ public class CustomAdapter extends ArrayAdapter<Task> {
             holder.title = (TextView) convertView.findViewById(R.id.title);
             holder.description = (TextView) convertView.findViewById(R.id.description);
             holder.checkBox = (CheckBox) convertView.findViewById(R.id.checkBox_Task);
+
+
             convertView.setTag(holder);
 
 //            holder.checkBox.setOnClickListener(new View.OnClickListener() {
@@ -99,6 +109,17 @@ public class CustomAdapter extends ArrayAdapter<Task> {
         holder.title.setText(Task.getTitle());
         holder.description.setText(Task.getDescription());
         holder.checkBox.setChecked(Task.getDone());
+
+        RelativeLayout r = (RelativeLayout)convertView.findViewById(R.id.relativeLayout_Task);
+        GradientDrawable bgShape = (GradientDrawable)r.getBackground();
+        if(Task.getPriority() == 0){
+            bgShape.setColor(ContextCompat.getColor(context, R.color.defaultLow));
+        }else if(Task.getPriority() == 1){
+            bgShape.setColor(ContextCompat.getColor(context, R.color.medium));
+        }else if(Task.getPriority() == 2){
+            bgShape.setColor(ContextCompat.getColor(context, R.color.high));
+        }
+
         holder.description.setTag(Task);
 
         return convertView;

@@ -113,26 +113,30 @@ public class MainActivity extends AppCompatActivity {
 
     //Start showing the tasks
     private void displayTasks() {
-        String myData = "";
-        try {
-            FileInputStream fis = new FileInputStream("tasks.json");
-            DataInputStream in = new DataInputStream(fis);
+//        String myData = "";
+//        try {
+//            FileInputStream fis = new FileInputStream("tasks.json");
+//            DataInputStream in = new DataInputStream(fis);
+//
+//            BufferedReader br = new BufferedReader(new InputStreamReader(in));
+//            String line;
+//
+//            while ((line = br.readLine()) != null){
+//                myData = myData + line;
+//                parseJson(myData);
+//            }
+//
+//            in.close();
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
 
-            BufferedReader br = new BufferedReader(new InputStreamReader(in));
-            String line;
-
-            while ((line = br.readLine()) != null){
-                myData = myData + line;
-                parseJson(myData);
-            }
-
-            in.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
+        Task t = new Task(1,"Title", "Low", false, 0, false, 1);
+        Task tt = new Task(1,"Title", "Medium", false, 1, false, 1);
+        Task ts = new Task(1,"Title", "High", false, 2, false, 1);
+        TaskList.add(t);TaskList.add(tt);TaskList.add(ts);
         //Initialize the CustomAdapter and pass the correspondent vars to constructor
         CustomAdapter dataAdapter = new CustomAdapter(this, R.layout.task, TaskList);
         //ListView_Tasks-> ID of the ListView available in content_main.xml, where Tasks are added
