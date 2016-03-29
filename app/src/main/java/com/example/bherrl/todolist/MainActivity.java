@@ -111,46 +111,9 @@ public class MainActivity extends AppCompatActivity {
         displayTasks();
     }
 
-    private void parseJson(String data){
-
-        JSONArray jsObj = null;
-        try {
-            jsObj = new JSONArray(data);
-            for(int i=0; i < jsObj.length(); i++) {
-                JSONObject jo = jsObj.getJSONObject(i);
-
-                String title = jo.getString("title");
-                String desc = jo.getString("description");
-                int prio = jo.getInt("priority");
-                long date = jo.getLong("date");
-                boolean notif = jo.getBoolean("notification");
-                boolean done = jo.getBoolean("done");
-
-//    Konsttruktor:
-//    public Task(String title, String desc, int prio, long date, boolean d, boolean notif){
-
-                Task t = new Task(title, desc, prio, date, done, notif);
-
-                //add to list
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-    }
-
     //Start showing the tasks
     private void displayTasks() {
-        //Add Data to the array
-        Task Task = new Task("Task_1", "This is a Task", false, 1, false);
-        TaskList.add(Task);
-        Task = new Task("Task_2", "This is a Task", false, 1, false);
-        TaskList.add(Task);
-        //ArrayList with elements maybe from a database
-        ArrayList<Task> TaskList = new ArrayList<Task>();
-
         String myData = "";
-        // Baustelle
         try {
             FileInputStream fis = new FileInputStream("tasks.json");
             DataInputStream in = new DataInputStream(fis);
@@ -162,8 +125,6 @@ public class MainActivity extends AppCompatActivity {
                 myData = myData + line;
                 parseJson(myData);
             }
-
-
 
             in.close();
         } catch (FileNotFoundException e) {
@@ -191,6 +152,32 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void parseJson(String data){
+
+        JSONArray jsObj = null;
+        try {
+            jsObj = new JSONArray(data);
+            for(int i=0; i < jsObj.length(); i++) {
+                JSONObject jo = jsObj.getJSONObject(i);
+
+                int id = jo.getInt("taskID");
+                String title = jo.getString("title");
+                String desc = jo.getString("description");
+                int prio = jo.getInt("priority");
+                long date = jo.getLong("date");
+                boolean notif = jo.getBoolean("notification");
+                boolean done = jo.getBoolean("done");
+
+//    Konsttruktor:
+//    public Task(int id, String title, String desc, boolean d, int prio, boolean notif, long date){
+                Task t = new Task(id,title, desc,done, prio, notif, date);
+                TaskList.add(t);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
