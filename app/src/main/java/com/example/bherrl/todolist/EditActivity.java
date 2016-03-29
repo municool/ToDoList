@@ -11,14 +11,17 @@ import android.widget.ImageButton;
 import android.widget.RadioGroup;
 import android.widget.Switch;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.FileOutputStream;
+import java.util.ArrayList;
 
 public class EditActivity extends AppCompatActivity {
 
     private static long dateMillis;
+    private HelperLibrary hl = new HelperLibrary();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +46,7 @@ public class EditActivity extends AppCompatActivity {
     }
 
     public void createTask(View v) {
+
         JSONObject jo = new JSONObject();
         EditText etTitle = (EditText) findViewById(R.id.etTitle);
         EditText etDescription = (EditText) findViewById(R.id.etDescription);
@@ -53,20 +57,20 @@ public class EditActivity extends AppCompatActivity {
         View radioButton = rgPriority.findViewById(radioButtonID);
         int idx = rgPriority.indexOfChild(radioButton);
 
+
 //        Log.v("Index", Integer.toString(idx));
 //        Log.v("switch", Boolean.toString(sw.isChecked()));
 
         try {
-            jo.put("title", etTitle.getText().toString());
-            jo.put("description", etDescription.getText().toString());
-            jo.put("priority", idx);
-            jo.put("date", dateMillis);
-            jo.put("notification", sw.isChecked());
-
+            Task tsk = new Task(etTitle.getText().toString(), etDescription.getText().toString(), idx, sw.isChecked(), dateMillis, false);
         } catch (JSONException je) {
             je.printStackTrace();
         }
-        createFile("tasks.json", jo.toString());
+
+        hl.saveTasks();
+        Log.v( "test json", jo.toString());
+
+        finish();
 
     }
 
@@ -81,6 +85,7 @@ public class EditActivity extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
     }
 
     public long getDateMillis() {
