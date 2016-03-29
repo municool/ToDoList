@@ -59,6 +59,8 @@ public class EditActivity extends AppCompatActivity {
 
         Task tsk = new Task(etTitle.getText().toString(), etDescription.getText().toString(), false, idx, sw.isChecked(), dateMillis);
 
+        // taskList.get(list.size - 1)
+
         ArrayList<Task> t = ma.getTaskList();
         t.add(tsk);
         ma.setTaskList(t);
