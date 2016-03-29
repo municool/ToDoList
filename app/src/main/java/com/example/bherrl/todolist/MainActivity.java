@@ -34,7 +34,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements OnItemClickListener{
 
 
     private static ArrayList<Task> taskList = new ArrayList<Task>();
@@ -96,30 +96,6 @@ public class MainActivity extends AppCompatActivity {
 
     //Start showing the tasks
     private void displayTasks() {
-//        String myData = "";
-//        try {
-//            FileInputStream fis = new FileInputStream("tasks.json");
-//            DataInputStream in = new DataInputStream(fis);
-//
-//            BufferedReader br = new BufferedReader(new InputStreamReader(in));
-//            String line;
-//
-//            while ((line = br.readLine()) != null){
-//                myData = myData + line;
-//                parseJson(myData);
-//            }
-//
-//            in.close();
-//        } catch (FileNotFoundException e) {
-//            e.printStackTrace();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-
-//        Task t = new Task(1,"Title", "Low", false, 0, false, 1);
-//        Task tt = new Task(2,"Title", "Medium", false, 1, false, 1);
-//        Task ts = new Task(3,"Title", "High", false, 2, false, 1);
-//        taskList.add(t);taskList.add(tt);taskList.add(ts);
         String myData = "";
         try {
             FileInputStream fis = openFileInput("tasks.json");
@@ -187,5 +163,10 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
     }
 }

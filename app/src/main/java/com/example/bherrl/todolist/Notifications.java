@@ -14,7 +14,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.TaskStackBuilder;
-
+// http://www.androidbegin.com/tutorial/android-broadcast-receiver-notification-tutorial/
 /**
  * Created by bdomij on 23.03.2016.
  */
@@ -36,13 +36,14 @@ public class Notifications extends BroadcastReceiver{
         Notification notification = builder
                         .setContentTitle("Oh my Gosh ...")
                         .setSmallIcon(R.mipmap.ic_tick)
-                        .setContentText("What is this.. A notification What is this.. A notification What is this.. A notification What is this.. A notification What is this.. A notification")
+                        .setContentText("What is this.. A notification")
                         .setContentIntent(pendingIntent).build();
 
         //Bit to be bitwise-ored into the flags field that should be set if the notification should be canceled when it is clicked by the user
         //The Line below makes the Notification disappear when clicked
         notification.flags = Notification.DEFAULT_LIGHTS | Notification.FLAG_AUTO_CANCEL;
 
+        //GetSystemService: Gets the notification service-> Informs user that something is going on in the background
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         notificationManager.notify(0, notification);
 

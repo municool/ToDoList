@@ -83,6 +83,9 @@ public class EditActivity extends AppCompatActivity {
 
     }
 
+    private void editTask(){
+
+    }
 
     private void saveFile(JSONArray tasks) {
         FileOutputStream outputStream;
@@ -107,3 +110,4 @@ public class EditActivity extends AppCompatActivity {
         this.dateMillis = dateMillis;
     }
 }
+
