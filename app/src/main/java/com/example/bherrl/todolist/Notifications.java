@@ -28,6 +28,7 @@ public class Notifications extends BroadcastReceiver{
         stackBuilder.addParentStack(MainActivity.class);
         stackBuilder.addNextIntent(notifIntent);
 
+        //Flag indicating that if the described PendingIntent already exists, then keep it but replace its extra data with what is in this new Intent.
         PendingIntent pendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context);
