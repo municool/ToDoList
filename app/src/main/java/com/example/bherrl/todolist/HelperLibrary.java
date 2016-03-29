@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class HelperLibrary {
 
 
-    public JSONArray saveTasks(ArrayList<Task> tasks) {
+    public JSONArray convertTasksToJSONArray(ArrayList<Task> tasks) {
         JSONArray ja = new JSONArray();
 
         for (Task task : tasks) {

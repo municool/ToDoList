@@ -4,7 +4,6 @@ import android.content.Context;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -12,8 +11,6 @@ import android.widget.RadioGroup;
 import android.widget.Switch;
 
 import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.FileOutputStream;
 import java.util.ArrayList;
@@ -65,7 +62,8 @@ public class EditActivity extends AppCompatActivity {
         ArrayList<Task> t = ma.getTaskList();
         t.add(tsk);
         ma.setTaskList(t);
-        hl.saveTasks(ma.getTaskList());
+
+        saveFile(hl.convertTasksToJSONArray(ma.getTaskList()));
 
         finish();
 
