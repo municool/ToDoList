@@ -13,7 +13,12 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.io.BufferedReader;
+import java.io.DataInputStream;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -47,6 +52,10 @@ import android.widget.ListView;
 import android.widget.ShareActionProvider;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 
@@ -91,16 +100,63 @@ public class MainActivity extends AppCompatActivity {
         displayTasks();
     }
 
+    private void parseJson(String data){
+
+        JSONArray jsObj = null;
+        try {
+            jsObj = new JSONArray(data);
+            for(int i=0; i < jsObj.length(); i++) {
+                JSONObject jo = jsObj.getJSONObject(i);
+
+                String title = jo.getString("title");
+                String desc = jo.getString("description");
+                int prio = jo.getInt("priority");
+                long date = jo.getLong("date");
+                boolean notif = jo.getBoolean("notification");
+                boolean done = jo.getBoolean("done");
+
+//    Konsttruktor:
+//    public Task(String title, String desc, int prio, long date, boolean d, boolean notif){
+
+                Task t = new Task(title, desc, prio, date, done, notif);
+
+                //add to list
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+    }
+
     //Start showing the tasks
     private void displayTasks() {
         //ArrayList with elements maybe from a database
         ArrayList<Task> TaskList = new ArrayList<Task>();
 
-        //Add Data to the array
-        Task Task = new Task("Task_1", "This is a Task", false, 1, false);
-        TaskList.add(Task);
-        Task = new Task("Task_2", "This is a Task", false, 1, false);
-        TaskList.add(Task);
+        String myData = "";
+        // Baustelle
+        try {
+            FileInputStream fis = new FileInputStream("tasks.json");
+            DataInputStream in = new DataInputStream(fis);
+
+            BufferedReader br = new BufferedReader(new InputStreamReader(in));
+            String line;
+
+            while ((line = br.readLine()) != null){
+                myData = myData + line;
+                parseJson(myData);
+            }
+
+
+
+            in.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
         //Initialize the CustomAdapter and pass the correspondent vars to constructor
         CustomAdapter dataAdapter = new CustomAdapter(this,R.layout.task, TaskList);
         //ListView_Tasks-> ID of the ListView available in content_main.xml, where Tasks are added
