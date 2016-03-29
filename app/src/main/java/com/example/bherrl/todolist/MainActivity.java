@@ -134,8 +134,8 @@ public class MainActivity extends AppCompatActivity {
 //        }
 
         Task t = new Task(1,"Title", "Low", false, 0, false, 1);
-        Task tt = new Task(1,"Title", "Medium", false, 1, false, 1);
-        Task ts = new Task(1,"Title", "High", false, 2, false, 1);
+        Task tt = new Task(2,"Title", "Medium", false, 1, false, 1);
+        Task ts = new Task(3,"Title", "High", false, 2, false, 1);
         TaskList.add(t);TaskList.add(tt);TaskList.add(ts);
         //Initialize the CustomAdapter and pass the correspondent vars to constructor
         CustomAdapter dataAdapter = new CustomAdapter(this, R.layout.task, TaskList);

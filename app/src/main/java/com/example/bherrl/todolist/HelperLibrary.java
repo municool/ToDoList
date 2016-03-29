@@ -19,6 +19,7 @@ public class HelperLibrary {
             JSONObject jo = new JSONObject();
 
             try {
+                jo.put("TaskID", task.getTaskID());
                 jo.put("title", task.getTitle());
                 jo.put("description", task.getDescription());
                 jo.put("priority", task.getPriority());
