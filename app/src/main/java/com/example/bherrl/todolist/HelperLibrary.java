@@ -1,16 +1,25 @@
 package com.example.bherrl.todolist;
 
+import android.content.Context;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.FileOutputStream;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by bherrl on 29.03.2016.
  */
 public class HelperLibrary {
 
+    private Context context;
+
+    public HelperLibrary(Context context){
+        this.context = context;
+    }
 
     public JSONArray convertTasksToJSONArray(ArrayList<Task> tasks) {
         JSONArray ja = new JSONArray();
@@ -36,13 +45,13 @@ public class HelperLibrary {
         return ja;
     }
 
-    public ArrayList<Task> parseJson(String data){
+    public ArrayList<Task> parseJson(String data) {
 
         ArrayList<Task> taskArrayList = new ArrayList<Task>();
         JSONArray jsObj;
         try {
             jsObj = new JSONArray(data);
-            for(int i=0; i < jsObj.length(); i++) {
+            for (int i = 0; i < jsObj.length(); i++) {
                 JSONObject jo = jsObj.getJSONObject(i);
 
                 int id = jo.getInt("taskID");
@@ -53,15 +62,53 @@ public class HelperLibrary {
                 boolean notif = jo.getBoolean("notification");
                 boolean done = jo.getBoolean("done");
 
-//    Konsttruktor:
-//    public Task(int id, String title, String desc, boolean d, int prio, boolean notif, long date){
-                Task t = new Task(id,title, desc,done, prio, notif, date);
+                Task t = new Task(id, title, desc, done, prio, notif, date);
                 taskArrayList.add(t);
             }
         } catch (JSONException e) {
             e.printStackTrace();
         }
         return taskArrayList;
+    }
+
+    public static JSONArray removeEntry(final int idx, final JSONArray from) {
+        final List<JSONObject> objs = asList(from);
+        objs.remove(idx);
+
+        final JSONArray ja = new JSONArray();
+        for (final JSONObject obj : objs) {
+            ja.put(obj);
+        }
+
+        return ja;
+    }
+
+    public static List<JSONObject> asList(final JSONArray ja) {
+        final int len = ja.length();
+        final ArrayList<JSONObject> result = new ArrayList<JSONObject>(len);
+        for (int i = 0; i < len; i++) {
+            final JSONObject obj = ja.optJSONObject(i);
+            if (obj != null) {
+                result.add(obj);
+            }
+        }
+        return result;
+    }
+
+    public void saveFile(JSONArray tasks) {
+        FileOutputStream outputStream;
+        String fileName = "tasks.json";
+
+
+        try {
+            outputStream = context.openFileOutput(fileName, Context.MODE_PRIVATE);
+            String jsonString = tasks.toString();
+            outputStream.write(jsonString.getBytes());
+            outputStream.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
 }

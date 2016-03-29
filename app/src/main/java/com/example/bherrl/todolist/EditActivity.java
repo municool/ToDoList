@@ -1,6 +1,5 @@
 package com.example.bherrl.todolist;
 
-import android.content.Context;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,20 +10,20 @@ import android.widget.ImageButton;
 import android.widget.RadioGroup;
 import android.widget.Switch;
 
-import org.json.JSONArray;
 
-import java.io.FileOutputStream;
 import java.util.ArrayList;
 
 public class EditActivity extends AppCompatActivity {
 
     private static long dateMillis;
-    private HelperLibrary hl = new HelperLibrary();
+    private HelperLibrary hl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit);
+
+        hl = new HelperLibrary(this);
 
         ImageButton cancel = (ImageButton) findViewById(R.id.btnCancel);
         if (cancel != null) {
@@ -61,41 +60,25 @@ public class EditActivity extends AppCompatActivity {
 //        Log.v("Index", Integer.toString(idx));
 //        Log.v("switch", Boolean.toString(sw.isChecked()));
         Log.v("test", Integer.toString(t.size()));
-        if(t.size() != 0) {
+        if (t.size() != 0) {
             ts = t.get(t.size() - 1);
             Log.v("test", "if size");
             id = ts.getTaskID() + 1;
-        }else{
+        } else {
             id = 1;
         }
 
         Task tsk = new Task(id, etTitle.getText().toString(), etDescription.getText().toString(), false, idx, sw.isChecked(), dateMillis);
-        Log.v( "test", Integer.toString(id));
+        Log.v("test", Integer.toString(id));
 
         Log.v("test", Integer.toString(t.size()));
         t.add(tsk);
         Log.v("test", Integer.toString(t.size()));
         ma.setTaskList(t);
 
-        saveFile(hl.convertTasksToJSONArray(ma.getTaskList()));
+        hl.saveFile(hl.convertTasksToJSONArray(ma.getTaskList()));
 
         finish();
-
-    }
-
-
-    private void saveFile(JSONArray tasks) {
-        FileOutputStream outputStream;
-        String fileName = "tasks.json";
-
-        try {
-            outputStream = openFileOutput(fileName, Context.MODE_PRIVATE);
-            String jsonString = tasks.toString();
-            outputStream.write(jsonString.getBytes());
-            outputStream.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
     }
 
