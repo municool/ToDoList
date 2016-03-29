@@ -2,8 +2,10 @@ package com.example.bherrl.todolist;
 
 import android.content.Context;
 
+import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Date;
@@ -23,11 +25,11 @@ public class Task {
     boolean notification = false;
 
     //Konstruktor
-    public Task(String title, String desc, boolean d, int prio, boolean notif){
+    public Task(String title, String desc, boolean d, int prio, boolean notif, long date, boolean done){
         this.description = desc;
         this.title = title;
         this.done = d;
-        //this.date = date;
+        this.date = date;
         this.priority = prio;
         this.notification = notif;
     }
@@ -35,17 +37,8 @@ public class Task {
     //Setter
     public void setTaskID(String filename, Context context){
 
-        FileInputStream inputStream = null;
-        try {
-            inputStream = context.openFileInput("Tasks.json");
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-
-        InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
 
 
-        //this.taskID = ID;
     }
 
     public void  setTitle(String title){
