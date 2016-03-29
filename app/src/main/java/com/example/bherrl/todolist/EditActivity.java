@@ -85,7 +85,8 @@ public class EditActivity extends AppCompatActivity {
 
         try {
             outputStream = openFileOutput(fileName, Context.MODE_PRIVATE);
-            outputStream.write(tasks.toString().getBytes());
+            String jsonString = tasks.toString();
+            outputStream.write(jsonString.getBytes());
             outputStream.close();
         } catch (Exception e) {
             e.printStackTrace();
