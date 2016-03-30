@@ -1,60 +1,35 @@
 package com.example.bherrl.todolist;
 
-import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.shapes.Shape;
-import android.renderscript.RenderScript;
 import android.support.v4.content.ContextCompat;
 import android.widget.ArrayAdapter;
-import com.example.bherrl.todolist.Task;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
 
 
-import android.app.Activity;
-import android.content.ComponentName;
 import android.content.Context;
-import android.content.Intent;
-import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
-import android.os.Bundle;
-import android.support.v4.app.ShareCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.ListView;
-import android.widget.RadioButton;
 import android.widget.RelativeLayout;
-import android.widget.ShareActionProvider;
 import android.widget.TextView;
-import android.widget.Toast;
 
 /**
  * Created by bdomij on 22.03.2016.
  */
 public class CustomAdapter extends ArrayAdapter<Task> {
 
-    public ArrayList<Task> TaskList;
+    public ArrayList<Task> taskList;
     Context context;
 
     public CustomAdapter(Context context, int textViewResourceId,
                          ArrayList<Task> TaskList) {
         super(context, textViewResourceId, TaskList);
-        this.TaskList = new ArrayList<Task>();
-        this.TaskList.addAll(TaskList);
+        this.taskList = new ArrayList<Task>();
+        this.taskList.addAll(TaskList);
         this.context = context;
     }
 
@@ -107,7 +82,7 @@ public class CustomAdapter extends ArrayAdapter<Task> {
             holder = (ViewHolder) convertView.getTag();
         }
 
-        Task Task = TaskList.get(position);
+        Task Task = taskList.get(position);
         holder.title.setText(Task.getTitle());
         holder.description.setText(Task.getDescription());
         holder.checkBox.setChecked(Task.getDone());

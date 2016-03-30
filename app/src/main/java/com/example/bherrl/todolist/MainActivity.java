@@ -10,7 +10,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -23,7 +22,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 
@@ -32,13 +30,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 
 public class MainActivity extends AppCompatActivity implements OnItemClickListener, AdapterView.OnItemLongClickListener {
@@ -171,7 +166,7 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
                     return lhs.getPriority() - rhs.getPriority();
                 }
             });
-            dataAdapter.TaskList = taskList;
+            dataAdapter.taskList = taskList;
             dataAdapter.notifyDataSetChanged();
             return true;
         } else if (id == R.id.action_Filter_Status) {
@@ -186,7 +181,7 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
                     return 0;
                 }
             });
-            dataAdapter.TaskList = taskList;
+            dataAdapter.taskList = taskList;
             dataAdapter.notifyDataSetChanged();
             return true;
 
@@ -203,7 +198,7 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
                 }
             });
 
-            dataAdapter.TaskList = taskList;
+            dataAdapter.taskList = taskList;
             dataAdapter.notifyDataSetChanged();
 
             return true;

@@ -97,6 +97,7 @@ public class EditActivity extends AppCompatActivity {
             id = 1;
         }
 
+        //Neuer Task oder bestehender Task bearbeiten
         if(editingTaskId==-1) {
             Task tsk = new Task(id, etTitle.getText().toString(), etDescription.getText().toString(), false, idx, sw.isChecked(), dateMillis);
             t.add(tsk);
