@@ -77,11 +77,37 @@ public class HelperLibrary {
         return taskArrayList;
     }
 
+
     public Task getTaskWithId(int id, ArrayList<Task> taskArrayList) {
-        for(Task t: taskArrayList) {
-            if(t.getTaskID()==id) return t;
+        for (Task t : taskArrayList) {
+            if (t.getTaskID() == id) return t;
         }
         return null;
+    }
+
+    public ArrayList<Task> convertJSONArrayToTasklist (JSONArray jsObj){
+
+        ArrayList<Task> taskArrayList = new ArrayList<Task>();
+        try {
+            for (int i = 0; i < jsObj.length(); i++) {
+                JSONObject jo = jsObj.getJSONObject(i);
+
+                int id = jo.getInt("taskID");
+                String title = jo.getString("title");
+                String desc = jo.getString("description");
+                int prio = jo.getInt("priority");
+                long date = jo.getLong("date");
+                boolean notif = jo.getBoolean("notification");
+                boolean done = jo.getBoolean("done");
+
+                Task t = new Task(id, title, desc, done, prio, notif, date);
+                taskArrayList.add(t);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return taskArrayList;
+
     }
 
     public static JSONArray removeEntry(final int idx, final JSONArray from) {
