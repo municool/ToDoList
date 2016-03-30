@@ -3,9 +3,11 @@ package com.example.bherrl.todolist;
 import android.annotation.TargetApi;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
+import android.content.DialogInterface;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -36,12 +38,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 
-public class MainActivity extends AppCompatActivity implements OnItemClickListener, AdapterView.OnItemLongClickListener{
+public class MainActivity extends AppCompatActivity implements OnItemClickListener, AdapterView.OnItemLongClickListener {
 
 
     private static ArrayList<Task> taskList = new ArrayList<Task>();
     private HelperLibrary hl;
-    private static boolean deleteMode;
+    private AlertDialog.Builder builder;
 
     public ArrayList<Task> getTaskList() {
         return taskList;
@@ -70,15 +72,11 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(!deleteMode) {
-                    MainActivity.this.startActivity(editIntent);
-                }else{
-
-                }
+                MainActivity.this.startActivity(editIntent);
             }
         });
-        deleteMode = false;
 
+        builder = new AlertDialog.Builder(this);
 
 
         // Alarm Manager is created using ALARM_SERVICE.
@@ -111,7 +109,7 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
             BufferedReader br = new BufferedReader(new InputStreamReader(in));
             String line;
 
-            while ((line = br.readLine()) != null){
+            while ((line = br.readLine()) != null) {
                 myData = myData + line;
             }
 
@@ -132,20 +130,7 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
         listView.setOnItemClickListener(this);
         listView.setOnItemLongClickListener(this);
 
-        //Click Event Listener
-//        listView.setOnItemClickListener(new OnItemClickListener() {
-//            public void onItemClick(AdapterView<?> parent, View view,
-//                                    int position, long id) {
-//                // When clicked, show a toast with the TextView text
-//                Task task = (Task) parent.getItemAtPosition(position);
-//                Toast.makeText(getApplicationContext(),
-//                        "Clicked on Row: " + task.getTitle(),
-//                        Toast.LENGTH_LONG).show();
-//            }
-//        });
-
     }
-
 
 
     @Override
@@ -177,15 +162,30 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
 
     @Override
     public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 
-        if(deleteMode){
-            deleteMode = false;
-            fab.setImageResource(R.mipmap.ic_add);
-        }else{
-            deleteMode = true;
-            fab.setImageResource(R.mipmap.ic_delete);
-        }
+        final int taskid = (int)id;
+        builder.setTitle("Warning")
+                .setMessage("Do you really want to delete this task?")
+                .setCancelable(false)
+                .setIcon(R.mipmap.ic_delete)
+                .setPositiveButton("Accept", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+
+                        JSONArray ja = hl.removeEntry(taskid, hl.convertTasksToJSONArray(taskList));
+                        hl.saveFile(ja);
+                        taskList = hl.convertJSONArrayToTasklist(ja);
+
+                        displayTasks();
+
+                        Toast.makeText(getApplicationContext(), "Task deleted", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .setNegativeButton("Decline", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                    }
+                });
+        AlertDialog disc = builder.create();
+        disc.show();
         return false;
     }
 }
