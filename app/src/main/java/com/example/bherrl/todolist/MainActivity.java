@@ -23,6 +23,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 
 
 import android.content.Context;
@@ -45,16 +48,17 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
     private static Task taskToEdit;
     private HelperLibrary hl;
     private AlertDialog.Builder builder;
+    private CustomAdapter dataAdapter;
 
     public ArrayList<Task> getTaskList() {
         return taskList;
     }
 
-    public Task getTaskToEdit(){
+    public Task getTaskToEdit() {
         return taskToEdit;
     }
 
-    public boolean validateTask(){
+    public boolean validateTask() {
         return taskToEdit != null;
     }
 
@@ -110,7 +114,7 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
 
     //Start showing the tasks
     private void displayTasks() {
-        String myData = "";
+        String myData;
 
         myData = hl.openFile();
         taskList = hl.parseJson(myData);
@@ -134,7 +138,7 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
         }
 
         //Initialize the CustomAdapter and pass the correspondent vars to constructor
-        CustomAdapter dataAdapter = new CustomAdapter(this, R.layout.task, taskList);
+        dataAdapter = new CustomAdapter(this, R.layout.task, taskList);
         //ListView_Tasks-> ID of the ListView available in content_main.xml, where Tasks are added
         ListView listView = (ListView) findViewById(R.id.ListView_Tasks);
         // Assign adapter to ListView
@@ -161,6 +165,47 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_Filter_Prio) {
+            Collections.sort(taskList, new Comparator<Task>() {
+                @Override
+                public int compare(Task lhs, Task rhs) {
+                    return lhs.getPriority() - rhs.getPriority();
+                }
+            });
+            dataAdapter.TaskList = taskList;
+            dataAdapter.notifyDataSetChanged();
+            return true;
+        } else if (id == R.id.action_Filter_Status) {
+            Collections.sort(taskList, new Comparator<Task>() {
+                @Override
+                public int compare(Task o1, Task o2) {
+                    if (!o1.getDone() && o2.getDone()) {
+                        return 1;
+                    } else if (o1.getDone() && !o2.getDone()) {
+                        return -1;
+                    }
+                    return 0;
+                }
+            });
+            dataAdapter.TaskList = taskList;
+            dataAdapter.notifyDataSetChanged();
+            return true;
+
+        } else if (id == R.id.action_Filter_Date) {
+            Collections.sort(taskList, new Comparator<Task>() {
+                @Override
+                public int compare(Task o1, Task o2) {
+                    if (o1.getDate() > o2.getDate()) {
+                        return 1;
+                    } else if (o1.getDate() < o2.getDate()) {
+                        return -1;
+                    }
+                    return 0;
+                }
+            });
+
+            dataAdapter.TaskList = taskList;
+            dataAdapter.notifyDataSetChanged();
+
             return true;
         }
 
@@ -181,7 +226,7 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
     @Override
     public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
 
-        final int taskid = (int)id;
+        final int taskid = (int) id;
         builder.setTitle("Warning")
                 .setMessage("Do you really want to delete this task?")
                 .setCancelable(false)
@@ -204,6 +249,6 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
                 });
         AlertDialog disc = builder.create();
         disc.show();
-        return false;
+        return true;
     }
 }
