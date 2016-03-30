@@ -6,7 +6,13 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.DataInputStream;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -71,6 +77,13 @@ public class HelperLibrary {
         return taskArrayList;
     }
 
+    public Task getTaskWithId(int id, ArrayList<Task> taskArrayList) {
+        for(Task t: taskArrayList) {
+            if(t.getTaskID()==id) return t;
+        }
+        return null;
+    }
+
     public static JSONArray removeEntry(final int idx, final JSONArray from) {
         final List<JSONObject> objs = asList(from);
         objs.remove(idx);
@@ -109,6 +122,29 @@ public class HelperLibrary {
             e.printStackTrace();
         }
 
+    }
+
+    public String openFile() {
+        String myData = "";
+        try {
+            FileInputStream fis = context.openFileInput("tasks.json");
+            DataInputStream in = new DataInputStream(fis);
+
+            BufferedReader br = new BufferedReader(new InputStreamReader(in));
+            String line;
+
+            while ((line = br.readLine()) != null){
+                myData = myData + line;
+            }
+
+            in.close();
+            return myData;
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return "";
     }
 
 }

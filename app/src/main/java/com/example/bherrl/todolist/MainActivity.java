@@ -40,11 +40,20 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
 
 
     private static ArrayList<Task> taskList = new ArrayList<Task>();
+    private static Task taskToEdit;
     private HelperLibrary hl;
     private static boolean deleteMode;
 
     public ArrayList<Task> getTaskList() {
         return taskList;
+    }
+
+    public Task getTaskToEdit(){
+        return taskToEdit;
+    }
+
+    public boolean validateTask(){
+        return taskToEdit != null;
     }
 
     public void setTaskList(ArrayList<Task> taskList) {
@@ -99,24 +108,27 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
     //Start showing the tasks
     private void displayTasks() {
         String myData = "";
-        try {
-            FileInputStream fis = openFileInput("tasks.json");
-            DataInputStream in = new DataInputStream(fis);
+//        try {
+//            FileInputStream fis = openFileInput("tasks.json");
+//            DataInputStream in = new DataInputStream(fis);
+//
+//            BufferedReader br = new BufferedReader(new InputStreamReader(in));
+//            String line;
+//
+//            while ((line = br.readLine()) != null){
+//                myData = myData + line;
+//            }
+//
+//
+//            in.close();
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
 
-            BufferedReader br = new BufferedReader(new InputStreamReader(in));
-            String line;
-
-            while ((line = br.readLine()) != null){
-                myData = myData + line;
-            }
-
-            taskList = hl.parseJson(myData);
-            in.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        myData = hl.openFile();
+        taskList = hl.parseJson(myData);
 
         //Initialize the CustomAdapter and pass the correspondent vars to constructor
         CustomAdapter dataAdapter = new CustomAdapter(this, R.layout.task, taskList);
@@ -168,7 +180,14 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Toast.makeText(this, "Item:"+position+" clicked", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "Item:"+position+" clicked", Toast.LENGTH_SHORT).show();
+        int taskId = taskList.get(position).getTaskID();
+
+        final Intent detailsIntent = new Intent(this, DetailsActivity.class);
+        detailsIntent.putExtra("id", taskId);
+        MainActivity.this.startActivity(detailsIntent);
+
+
     }
 
     @Override
