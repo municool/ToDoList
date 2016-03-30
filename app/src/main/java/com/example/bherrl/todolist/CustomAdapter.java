@@ -33,6 +33,8 @@ public class CustomAdapter extends ArrayAdapter<Task> {
         this.context = context;
     }
 
+
+
     private class ViewHolder {
         TextView title;
         TextView description;
@@ -89,6 +91,7 @@ public class CustomAdapter extends ArrayAdapter<Task> {
         return convertView;
 
     }
+
 
 
 

@@ -69,6 +69,14 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         hl = new HelperLibrary(this);
+
+
+
+
+    }
+
+    public void onCheckboxClicked(View view) {
+
     }
 
     @TargetApi(Build.VERSION_CODES.KITKAT)
