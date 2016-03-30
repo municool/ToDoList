@@ -70,9 +70,14 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MainActivity.this.startActivity(editIntent);
+                if(!deleteMode) {
+                    MainActivity.this.startActivity(editIntent);
+                }else{
+
+                }
             }
         });
+        deleteMode = false;
 
 
 
@@ -168,12 +173,10 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Toast.makeText(this, "Item:"+position+" clicked", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-        Toast.makeText(this, "LongClick:"+position+" clicked", Toast.LENGTH_SHORT).show();
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 
         if(deleteMode){

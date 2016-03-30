@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RadioGroup;
 import android.widget.Switch;
+import android.widget.Toast;
 
 
 import java.util.ArrayList;
@@ -70,6 +71,8 @@ public class EditActivity extends AppCompatActivity {
         ma.setTaskList(t);
 
         hl.saveFile(hl.convertTasksToJSONArray(ma.getTaskList()));
+
+        Toast.makeText(getApplicationContext(), "Task created", Toast.LENGTH_SHORT).show();
 
         finish();
 

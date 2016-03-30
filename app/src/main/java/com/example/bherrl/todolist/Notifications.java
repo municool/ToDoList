@@ -35,7 +35,7 @@ public class Notifications extends BroadcastReceiver{
 
         Notification notification = builder
                         .setContentTitle("Oh my Gosh ...")
-                        .setSmallIcon(R.mipmap.ic_tick)
+                        .setSmallIcon(R.mipmap.ic_launcher)
                         .setContentText("What is this.. A notification")
                         .setContentIntent(pendingIntent).build();
 
