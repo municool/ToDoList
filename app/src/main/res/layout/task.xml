@@ -7,34 +7,36 @@
     android:id="@+id/relativeLayout_Task"
     android:background="@drawable/task_shape"
     android:layout_marginBottom="16px"
-    android:onClick="editTask">
+    >
 
     <CheckBox
         android:id="@+id/checkBox_Task"
-        android:layout_width="fill_parent"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_alignParentLeft="@id/title"
+        android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:layout_alignWithParentIfMissing="true"
-        android:gravity="center_vertical" />
+        android:gravity="center_vertical"
+        android:focusable="false"
+        android:focusableInTouchMode="false"/>
 
     <TextView
         android:id="@+id/title"
         android:layout_toRightOf="@+id/checkBox_Task"
-        android:layout_width="fill_parent"
-        android:layout_height="match_parent"
-        android:layout_alignWithParentIfMissing="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:gravity="center_vertical"
         android:text="Title"
         android:textSize="16sp"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="31dp"/>
+        android:layout_marginStart="31dp"
+        android:focusable="false"
+        android:focusableInTouchMode="false"/>
 
     <TextView
         android:id="@+id/description"
         android:layout_below="@+id/title"
-        android:layout_width="fill_parent"
+        android:layout_width="wrap_content"
         android:layout_height="26dip"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
@@ -42,7 +44,9 @@
         android:singleLine="true"
         android:text="Description"
         android:textSize="12sp"
-        android:layout_alignStart="@+id/title"/>
+        android:layout_alignStart="@+id/title"
+        android:focusable="false"
+        android:focusableInTouchMode="false"/>
 
 </RelativeLayout>
 

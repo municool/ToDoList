@@ -89,8 +89,10 @@ public class CustomAdapter extends ArrayAdapter<Task> {
 
             convertView.setTag(holder);
 
+
 //            holder.checkBox.setOnClickListener(new View.OnClickListener() {
 //                public void onClick(View v) {
+//                    Log.v("todolist", "checkbox clicked");
 //                    CheckBox cb = (CheckBox) v;
 //                    Task Task = (Task) cb.getTag();
 //                    Toast.makeText(context.getApplicationContext(),
@@ -125,5 +127,7 @@ public class CustomAdapter extends ArrayAdapter<Task> {
         return convertView;
 
     }
+
+
 
 }

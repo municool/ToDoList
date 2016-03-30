@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -123,18 +124,20 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
         ListView listView = (ListView) findViewById(R.id.ListView_Tasks);
         // Assign adapter to ListView
         listView.setAdapter(dataAdapter);
+        listView.setOnItemClickListener(this);
+        listView.setOnItemLongClickListener(this);
 
         //Click Event Listener
-        listView.setOnItemClickListener(new OnItemClickListener() {
-            public void onItemClick(AdapterView<?> parent, View view,
-                                    int position, long id) {
-                // When clicked, show a toast with the TextView text
-                Task task = (Task) parent.getItemAtPosition(position);
-                Toast.makeText(getApplicationContext(),
-                        "Clicked on Row: " + task.getTitle(),
-                        Toast.LENGTH_LONG).show();
-            }
-        });
+//        listView.setOnItemClickListener(new OnItemClickListener() {
+//            public void onItemClick(AdapterView<?> parent, View view,
+//                                    int position, long id) {
+//                // When clicked, show a toast with the TextView text
+//                Task task = (Task) parent.getItemAtPosition(position);
+//                Toast.makeText(getApplicationContext(),
+//                        "Clicked on Row: " + task.getTitle(),
+//                        Toast.LENGTH_LONG).show();
+//            }
+//        });
 
     }
 
@@ -162,13 +165,15 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
         return super.onOptionsItemSelected(item);
     }
 
+
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+        Toast.makeText(this, "Item:"+position+" clicked", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+        Toast.makeText(this, "LongClick:"+position+" clicked", Toast.LENGTH_SHORT).show();
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 
         if(deleteMode){
