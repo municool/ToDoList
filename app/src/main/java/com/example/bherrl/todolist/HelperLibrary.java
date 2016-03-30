@@ -30,6 +30,7 @@ public class HelperLibrary {
         this.context = context;
     }
 
+    //Create Json Array with a Arraylist type Task
     public JSONArray convertTasksToJSONArray(ArrayList<Task> tasks) {
         JSONArray ja = new JSONArray();
 
@@ -54,6 +55,7 @@ public class HelperLibrary {
         return ja;
     }
 
+    // Creates ArrrayList type Task out of String delivered to it containing all the data
     public ArrayList<Task> parseJson(String data) {
 
         ArrayList<Task> taskArrayList = new ArrayList<Task>();
@@ -81,6 +83,7 @@ public class HelperLibrary {
     }
 
 
+    // Gets an element out of ArrayList by delivering it both ID and the List
     public Task getTaskWithId(int id, ArrayList<Task> taskArrayList) {
         for (Task t : taskArrayList) {
             if (t.getTaskID() == id) return t;
@@ -88,6 +91,7 @@ public class HelperLibrary {
         return null;
     }
 
+    // Convert MilliSeconds to a real Date with a given format
     public String convertToDate(long miliS){
 
         DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
@@ -97,6 +101,7 @@ public class HelperLibrary {
         return formatter.format(calendar.getTime());
     }
 
+    // Creates an ArrayList out of a Json Object
     public ArrayList<Task> convertJSONArrayToTasklist (JSONArray jsObj){
 
         ArrayList<Task> taskArrayList = new ArrayList<Task>();

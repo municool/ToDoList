@@ -64,19 +64,6 @@ public class CustomAdapter extends ArrayAdapter<Task> {
 
             convertView.setTag(holder);
 
-
-//            holder.checkBox.setOnClickListener(new View.OnClickListener() {
-//                public void onClick(View v) {
-//                    Log.v("todolist", "checkbox clicked");
-//                    CheckBox cb = (CheckBox) v;
-//                    Task Task = (Task) cb.getTag();
-//                    Toast.makeText(context.getApplicationContext(),
-//                            "Clicked on Checkbox: " + cb.getText() +
-//                                    " is " + cb.isChecked(),
-//                            Toast.LENGTH_LONG).show();
-//                    Task.setDone(cb.isChecked());
-//                }
-//            });
         }
         else {
             holder = (ViewHolder) convertView.getTag();

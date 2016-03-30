@@ -122,10 +122,6 @@ public class EditActivity extends AppCompatActivity {
 
     }
 
-    public long getDateMillis() {
-        return dateMillis;
-    }
-
     public void setDateMillis(long dateMillis) {
         this.dateMillis = dateMillis;
     }

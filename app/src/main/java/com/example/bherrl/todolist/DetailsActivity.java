@@ -28,18 +28,6 @@ public class DetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_details);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-//        FloatingActionButton editBtn = (FloatingActionButton) findViewById(R.id.btnEdit);
-//        if (editBtn != null) {
-//            editBtn.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//                    editTask();
-//                }
-//            });
-//        }
-
-
     }
 
     @Override
