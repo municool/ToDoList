@@ -13,7 +13,10 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -83,6 +86,15 @@ public class HelperLibrary {
             if (t.getTaskID() == id) return t;
         }
         return null;
+    }
+
+    public String convertToDate(long miliS){
+
+        DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(miliS);
+        return formatter.format(calendar.getTime());
     }
 
     public ArrayList<Task> convertJSONArrayToTasklist (JSONArray jsObj){

@@ -29,12 +29,13 @@
     android:id="@+id/rgPriority"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-        android:orientation="horizontal"
+    android:orientation="horizontal"
     android:paddingBottom="20dp"
-        android:editable="false"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="208dp">
+    android:editable="false"
+    android:layout_alignParentTop="true"
+    android:layout_alignParentStart="true"
+    android:layout_marginTop="208dp"
+    android:clickable="false">
 
     <RadioButton
         android:id="@+id/rbHigh"
@@ -42,7 +43,9 @@
         android:layout_height="wrap_content"
         android:layout_gravity="left"
         android:layout_weight="1"
-        android:text="High" />
+        android:text="High"
+        android:editable="false"
+        android:clickable="false"/>
 
     <RadioButton
         android:id="@+id/rbMedium"
@@ -51,7 +54,9 @@
         android:layout_gravity="center"
         android:layout_weight="1"
         android:checked="true"
-        android:text="Medium" />
+        android:text="Medium"
+        android:editable="false"
+        android:clickable="false"/>
 
     <RadioButton
         android:id="@+id/rbLow"
@@ -59,7 +64,9 @@
         android:layout_height="wrap_content"
         android:layout_gravity="right"
         android:layout_weight="1"
-        android:text="Low" />
+        android:text="Low"
+        android:editable="false"
+        android:clickable="false"/>
 
 </RadioGroup>
 
@@ -94,6 +101,17 @@
         android:layout_alignParentStart="true" />
 
     <TextView
+        android:id="@+id/tvChooseDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rgPriority"
+        android:onClick="showDatePickerDialog"
+        android:text="Choose Date"
+        android:textAlignment="center"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+
+    <TextView
         android:id="@+id/tvNotifications"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -102,6 +120,16 @@
         android:layout_marginTop="37dp"
         android:layout_below="@+id/tvDate"
         android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Edit"
+        android:id="@+id/btnEdit"
+        android:layout_below="@+id/tvNotifications"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="55dp"
+        android:onClick="editTask"/>
 
 
 </RelativeLayout>

@@ -1,5 +1,6 @@
 package com.example.bherrl.todolist;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
@@ -12,11 +13,14 @@ import android.widget.RadioGroup;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class DetailsActivity extends AppCompatActivity {
 
-    private static MainActivity ma;
+    private static int viewingTask;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,14 +29,15 @@ public class DetailsActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+//        FloatingActionButton editBtn = (FloatingActionButton) findViewById(R.id.btnEdit);
+//        if (editBtn != null) {
+//            editBtn.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                    editTask();
+//                }
+//            });
+//        }
 
 
     }
@@ -46,22 +51,32 @@ public class DetailsActivity extends AppCompatActivity {
         ArrayList<Task> taskList = hl.parseJson(myData);
         Task task = hl.getTaskWithId(taskId, taskList);
 
+        final Calendar c = Calendar.getInstance();
+
         TextView title = (TextView)findViewById(R.id.tvTitle);
         TextView descr = (TextView)findViewById(R.id.tvDescription);
         RadioGroup prio = (RadioGroup) findViewById(R.id.rgPriority);
         RadioButton rb = (RadioButton)prio.getChildAt(task.priority);
-        //Date
+        TextView date = (TextView)findViewById(R.id.tvChooseDate);
         TextView sw = (TextView) findViewById(R.id.tvNotifications);
 
         title.setText(task.title);
         descr.setText(task.description);
+
+
+        date.setText(hl.convertToDate(task.getDate()));
         rb.setChecked(true);
         //Date
         sw.setText((task.notification == false) ? "Notifications: None" : "Notifications: Active");
+
+        viewingTask = taskId;
     }
 
-    public void setTaskDetails(){
 
+    public void editTask(View v){
+        final Intent editIntent = new Intent(this, EditActivity.class);
+        editIntent.putExtra("id", viewingTask);
+        DetailsActivity.this.startActivity(editIntent);
     }
 
 }
