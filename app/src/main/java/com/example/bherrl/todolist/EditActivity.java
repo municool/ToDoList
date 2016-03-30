@@ -57,23 +57,16 @@ public class EditActivity extends AppCompatActivity {
         View radioButton = rgPriority.findViewById(radioButtonID);
         int idx = rgPriority.indexOfChild(radioButton);
 
-//        Log.v("Index", Integer.toString(idx));
-//        Log.v("switch", Boolean.toString(sw.isChecked()));
-        Log.v("test", Integer.toString(t.size()));
         if (t.size() != 0) {
             ts = t.get(t.size() - 1);
-            Log.v("test", "if size");
             id = ts.getTaskID() + 1;
         } else {
             id = 1;
         }
 
         Task tsk = new Task(id, etTitle.getText().toString(), etDescription.getText().toString(), false, idx, sw.isChecked(), dateMillis);
-        Log.v("test", Integer.toString(id));
 
-        Log.v("test", Integer.toString(t.size()));
         t.add(tsk);
-        Log.v("test", Integer.toString(t.size()));
         ma.setTaskList(t);
 
         hl.saveFile(hl.convertTasksToJSONArray(ma.getTaskList()));

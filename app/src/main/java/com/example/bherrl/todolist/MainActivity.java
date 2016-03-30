@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
 
     private static ArrayList<Task> taskList = new ArrayList<Task>();
     private HelperLibrary hl;
+    private static boolean deleteMode;
 
     public ArrayList<Task> getTaskList() {
         return taskList;
@@ -168,6 +169,15 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
 
     @Override
     public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+
+        if(deleteMode){
+            deleteMode = false;
+            fab.setImageResource(R.mipmap.ic_add);
+        }else{
+            deleteMode = true;
+            fab.setImageResource(R.mipmap.ic_delete);
+        }
         return false;
     }
 }
