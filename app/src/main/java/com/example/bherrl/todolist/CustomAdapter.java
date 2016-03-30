@@ -47,7 +47,7 @@ import android.widget.Toast;
  */
 public class CustomAdapter extends ArrayAdapter<Task> {
 
-    private ArrayList<Task> TaskList;
+    public ArrayList<Task> TaskList;
     Context context;
 
     public CustomAdapter(Context context, int textViewResourceId,
